@@ -153,6 +153,15 @@ ansible-playbook -i hosts kubernetes.yml
 **NOTE: you will have to type "yes" several times as prompted to accept the rsa fingerprint for ssh!** 
 
 
+Output should look something like:
+```
+PLAY RECAP ***********************************************************************************************************************************************
+master1.kube.local         : ok=24   changed=19   unreachable=0    failed=0
+worker1.kube.local         : ok=19   changed=16   unreachable=0    failed=0
+worker2.kube.local         : ok=19   changed=16   unreachable=0    failed=0
+worker3.kube.local         : ok=19   changed=16   unreachable=0    failed=0
+```
+
 ## SSH to the master node
 ```ssh kube@192.168.11.120```
 
