@@ -1,0 +1,3 @@
+- include: bootstrap.yml
+- include: kube-masters.yml
+- include: kube-workers.yml

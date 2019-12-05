@@ -1,0 +1,23 @@
+- hosts: kube-masters[0]
+  gather_facts: no
+
+  tasks:
+    - name: get join command
+      command: kubeadm token create --print-join-command
+      register: join_command_raw
+      changed_when: no
+
+    - name: set join command
+      set_fact:
+        join_command: "{{ join_command_raw.stdout_lines[0] }}"
+
+- hosts: kube-nodes
+  become: yes
+
+  vars:
+    join_command: "{{ hostvars['master1.kube.local'].join_command }}"
+
+  roles:
+    - hosts
+    - kube-dependencies
+    - kube-worker-init

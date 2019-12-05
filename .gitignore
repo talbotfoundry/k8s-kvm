@@ -1,0 +1,7 @@
+.env
+.venv
+env/
+venv/
+ENV/
+.vagrant
+.vagrant/

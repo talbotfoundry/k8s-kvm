@@ -1,0 +1,11 @@
+- name: join cluster
+  command: "{{ join_command }}"
+  args:
+    creates: /root/node_joined.txt
+  register: kubeadm_join_raw
+
+- name: save kubeadm join output to a file
+  copy:
+    content: "stdout:\n{{ kubeadm_join_raw.stdout }}\n\nstderr:\n{{ kubeadm_join_raw.stderr }}"
+    dest: /root/node_joined.txt
+  when: kubeadm_join_raw.changed
