@@ -146,6 +146,8 @@ Kill the host ssh key fingerprint cache
 ## Make the cluster again
 
 Run the vagrant up command
+
 Run ansible again
+
 Install Kubernetes networking
 
