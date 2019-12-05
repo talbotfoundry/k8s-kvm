@@ -162,6 +162,7 @@ worker2.kube.local         : ok=19   changed=16   unreachable=0    failed=0
 worker3.kube.local         : ok=19   changed=16   unreachable=0    failed=0
 ```
 
+
 ## SSH to the master node
 ```ssh kube@192.168.11.120```
 
