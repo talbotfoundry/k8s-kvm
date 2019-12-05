@@ -1,6 +1,16 @@
 # k8s-kvm
 Upstream Kubernetes via KVM Vagrant and Ansible
 
+
+# Project purpose
+
+Create a "real" Kubernetes cluster on commodity hardware you might already have
+at home or in the lab.  A lot of folks need something more substantial than than Mikiube
+ie distinct hosts for the control plane and worker nodes, but don't want to pay
+for the cloud all day long when using the cluster a few times a month.
+
+## About
+
 KVM is highly efficient allowing for a "real" kubernetes cluster to run on a single machine given a decent bit of CPU and RAM
 
 This installation is targeted for a bare metal install on a machine hooked into a lab or home network.  The master and worker nodes will have ip addresses on your network. 
@@ -36,9 +46,9 @@ network:
     version: 2
  ```
  
- # Get Kubernetes running
+# Installation
  
- ## Change the network prefix to the free address block you chose
+## Change the network prefix to the free address block you chose
  Open Vagrantfile with your favorite text editor and edit the following line.  Make sure you choose a network block that's good on your network.
  
  ```
@@ -46,7 +56,7 @@ network:
  
 ```
  
- ## Edit alloted resources if desired
+## Edit alloted resources if desired
 
  Also in Vagrantfile.
  
