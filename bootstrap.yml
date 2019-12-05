@@ -3,9 +3,6 @@
 
   vars:
     ansible_user: vagrant
-    # ubuntu requires change default password on the first login
-    # so you should manually login and change password to `raspberry1`
-    # https://wiki.ubuntu.com/ARM/RaspberryPi#First_boot_.28Username.2FPassword.29
     ansible_ssh_pass: vagrant
     ansible_connection: paramiko
 
@@ -14,7 +11,6 @@
     - name: Disable auto upgrades
       copy:
         src: /usr/share/unattended-upgrades/20auto-upgrades-disabled
-        # https://help.ubuntu.com/community/AutomaticSecurityUpdates
         dest: /etc/apt/apt.conf.d/20auto-upgrades
         remote_src: yes
 
@@ -39,21 +35,8 @@
         shell: /bin/bash
         groups: sudo
 
-#    - name: Set pw
-#      authorized_key:
-#        user: kube
-#        password: 
-#        key: "{{ kube_ssh_pub_key }}"
 
     - name: Allow kube to use sudo without a password
       copy:
         content: "kube ALL=(ALL) NOPASSWD:ALL"
         dest: /etc/sudoers.d/kube
-
-        #    - name: Remove bootstrap user
-        #      user:
-        #        name: "{{ ansible_user }}"
-        #        shell: /usr/sbin/nologin
-        #        password_lock: yes
-        #
-
