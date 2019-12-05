@@ -36,6 +36,8 @@ network:
     version: 2
  ```
  
+ # Get Kubernetes running
+ 
  ## Change the network prefix to the free address block you chose
  Open Vagrantfile with your favorite text editor and edit the following line.  Make sure you choose a network block that's good on your network.
  
