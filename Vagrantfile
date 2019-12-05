@@ -25,6 +25,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :libvirt do |libvirt|
     libvirt.cpus = 2
     libvirt.memory = 4096
+    libvirt.driver = "kvm"
   end
       
     config.vm.define "master1" do |master|
