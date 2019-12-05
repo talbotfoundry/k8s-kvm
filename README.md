@@ -34,7 +34,7 @@ A NUC with 32GB RAM will do as well.
 Make sure you have at least 4 cores (not threads) and preferably more than 16GB RAM.
 (16 will work, but just run two worker nodes).  Used hardware is great for this project.
 
-Lastly do a **fresh** OS install.
+Lastly do a **fresh** OS install.  Tested with Ubuntu 18.04.
 
 
 
@@ -50,7 +50,10 @@ apt-get install -qy qemu-kvm libvirt-bin virtinst bridge-utils cpu-checker pytho
 ```
 
 ## Create a bridge
-This will depend on the ubuntu distro and how you chose to set up networking.  Call the bridge 'br0' if you can.  An example netplan configuration is
+This will depend on the ubuntu distro and how you chose to set up networking.  
+Call the bridge 'br0' if you can.  An example netplan configuration is
+
+Open /etc/netplan/50-cloud-init.yaml with your favorite editor
 
 ```
 network:
@@ -64,6 +67,13 @@ network:
                 - enp1s0
     version: 2
  ```
+ 
+ Now run
+ ```
+ netplan apply
+ ```
+ 
+ *Note this will likely result in the machine getting a new ip address*
  
 # Installation
 
@@ -101,7 +111,8 @@ You change the allotted number of CPU cores and memory.  Be sure not to overallo
 ```
 vagrant up
 ```
-Your virtual machines should be created.  It may take several minutes to download the image the first time
+Your virtual machines should be created.  It may take several minutes to download the image the first time,
+but it'll cache it in case you wish to rebuild the cluster.
 
 *If* You get any screw messages about image pool conflicts, try running:
 
