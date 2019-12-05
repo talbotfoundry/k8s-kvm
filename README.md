@@ -226,5 +226,25 @@ Run ansible again
 
 Install Kubernetes networking
 
+# Housekeeping items
+
+## Setup kubectl on your machine
+
+Grab the config and keys from the .kube/config file in the kube user's home directory
+on the master.  Add them to the .kube/config file on your machine with kubectl.
+
+
+### Check the status of your VM's
+
+```
+root@z600:~/k8s-kvm# virsh list --all
+ Id    Name                           State
+----------------------------------------------------
+ 1     k8s-kvm_worker-3               running
+ 2     k8s-kvm_worker-1               running
+ 3     k8s-kvm_worker-2               running
+ 4     k8s-kvm_master1                running
+
+```
 
 
