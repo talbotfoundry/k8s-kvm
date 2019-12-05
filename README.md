@@ -28,7 +28,7 @@ The cluster can be destroyed and created again easily as the networking configur
 A bare metal machine (the kind that will hurt you if you kick it barefoot).  Do yourself a favor and plug it
 into a physical network too (using a cord).  
 
-An old workstation with multiple sockets is great (I used an sever year old Z600).
+An old workstation with multiple sockets is great (I used an seven year old Z600).
 A NUC with 32GB RAM will do as well.  
 
 Make sure you have at least 4 cores (not threads) and preferably more than 16GB RAM.
@@ -114,7 +114,7 @@ vagrant up
 Your virtual machines should be created.  It may take several minutes to download the image the first time,
 but it'll cache it in case you wish to rebuild the cluster.
 
-*If* You get any screw messages about image pool conflicts, try running:
+*If* You get any screwy messages about image pool conflicts, try running:
 
 ```
 virsh pool-destroy images
@@ -161,7 +161,8 @@ Or run them all together
 ansible-playbook -i hosts kubernetes.yml
 ```
 
-**NOTE: you will have to type "yes" several times as prompted to accept the rsa fingerprint for ssh!** 
+**NOTE: you will have to type "yes" several times as prompted to accept the rsa fingerprint for ssh!  Do it quick 
+or its easy to get lost in the console** 
 
 
 Output should look something like:
