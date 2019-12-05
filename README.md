@@ -13,16 +13,35 @@ for the cloud all day long when using the cluster a few times a month.
 
 KVM is highly efficient allowing for a "real" kubernetes cluster to run on a single machine given a decent bit of CPU and RAM
 
-This installation is targeted for a bare metal install on a machine hooked into a lab or home network.  The master and worker nodes will have ip addresses on your network. 
+This installation is targeted for a bare metal install on a machine hooked into a lab or home network.  
+The master and worker nodes will have ip addresses on your network. This will allow you to interact with it like its a "real" cluster.
 
 The cluster can be destroyed and created again easily as the networking configuration, Vagrantfile, and Ansible playbook only need to be configured once.  
 
 
 # Pre-install requirements
 
-KVM needs to run as root, so go ahead and make yourself root
+
+
+## Pick some hardware
+
+A bare metal machine (the kind that will hurt you if you kick it barefoot).  Do yourself a favor and plug it
+into a physical network too (using a cord).  
+
+An old workstation with multiple sockets is great (I used an sever year old Z600).
+A NUC with 32GB RAM will do as well.  
+
+Make sure you have at least 4 cores (not threads) and preferably more than 16GB RAM.
+(16 will work, but just run two worker nodes).  Used hardware is great for this project.
+
+Lastly do a **fresh** OS install.
+
+
 
 ## Identify a block of contiguous free ip addresses.
+
+Kubernetes is IP address hungry, so make sure you have some on your network.
+
 One is needed for the master and must end in 0.  Then one for each worker node starting with 1.  In the example I used 192.168.11.120 through 192.168.11.123 for a total of four addresses.
 
 ## Install dependencies
@@ -47,6 +66,9 @@ network:
  ```
  
 # Installation
+
+KVM needs to run as root, so go ahead and make yourself root
+
  
 ## Change the network prefix to the free address block you chose
  Open Vagrantfile with your favorite text editor and edit the following line.  Make sure you choose a network block that's good on your network.
@@ -80,6 +102,15 @@ You change the allotted number of CPU cores and memory.  Be sure not to overallo
 vagrant up
 ```
 Your virtual machines should be created.  It may take several minutes to download the image the first time
+
+*If* You get any screw messages about image pool conflicts, try running:
+
+```
+virsh pool-destroy images
+virsh pool-delete images
+virsh pool-undefine images
+```
+
 
 ## Configure hosts for ansible
 
@@ -132,18 +163,30 @@ Change the ip address to whatever you made the master.  The default username / p
  ## Add kubernetes network plugin
  
  ```
+ kubectl get nodes
+ ```
+ 
+ The nodes will show not ready until you install a network plugin.
+ 
+ ```
  kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.11.0/Documentation/kube-flannel.yml
  ```
  
  ## Smoke testing cluster
  
+ 
+ 
  ```
+ kubectl get nodes
  kubectl create deployment nginx --image=nginx
  kubectl create service nodeport nginx --tcp=80:80
  kubectl describe service nginx
 ```
 
 # Rebooting the cluster
+
+Building the VM's with KVM and using a host bridge allows the cluster to be torn
+down and brought back up quite easily.  This is great when you want to start fresh.
 
 ## Kill the old cluster
 
@@ -160,4 +203,6 @@ Run the vagrant up command
 Run ansible again
 
 Install Kubernetes networking
+
+
 
