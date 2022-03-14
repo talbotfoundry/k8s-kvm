@@ -9,7 +9,7 @@
 
 #Net work prefix in which a single digit is appended
 #ex 192.168.1.5 will have a master at 192.168.1.50 and workers starting from 192.168.1.51
-NETWORK_PREFIX="192.168.11.12"
+NETWORK_PREFIX="10.0.1.24"
 
 #make sure libvirt, qemu, kvm etc are installed
 #make sure other hypervisers such as virtualbox are not
@@ -23,8 +23,8 @@ Vagrant.configure("2") do |config|
     config.ssh.insert_key = false
 
   config.vm.provider :libvirt do |libvirt|
-    libvirt.cpus = 2
-    libvirt.memory = 4096
+    libvirt.cpus = 4
+    libvirt.memory = 16384
     libvirt.driver = "kvm"
   end
       

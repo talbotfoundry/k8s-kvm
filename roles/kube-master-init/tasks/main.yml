@@ -1,5 +1,5 @@
 - name: initialize the cluster
-  command: kubeadm init --pod-network-cidr=10.244.0.0/16
+  command: kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.0.1.240
   args:
     creates: /root/cluster_initialized.txt
   register: kubeadm_init_raw
