@@ -4,6 +4,17 @@
     state: present
     update_cache: true
 
+- name: make docker cgroup driver agree with k8s cgroup driver
+  copy:
+    dest: "/etc/docker/daemon.json"
+    content: "{  \"exec-opts\": [\"native.cgroupdriver=systemd\"] }"
+
+- name: restart docker service
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: docker
+
 - name: install APT Transport HTTPS
   apt:
     name: apt-transport-https
@@ -22,13 +33,13 @@
 
 - name: install kubelet
   apt:
-    name: kubelet=1.15.2-00
+    name: kubelet=1.23.4-00
     state: present
     update_cache: true
 
 - name: install kubeadm
   apt:
-    name: kubeadm=1.15.2-00
+    name: kubeadm=1.23.4-00
     state: present
 
 - name: enable service docker

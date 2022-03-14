@@ -191,7 +191,7 @@ Change the ip address to whatever you made the master.  The default username / p
  The nodes will show not ready until you install a network plugin.
  
  ```
- kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.11.0/Documentation/kube-flannel.yml
+   kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
  ```
  
  ## Smoke testing cluster
