@@ -1,3 +1,9 @@
+- name: install avahi-daemon
+  apt:
+    name: avahi-daemon
+    state: present
+    update_cache: true
+
 - name: install Docker
   apt:
     name: docker.io
